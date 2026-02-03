@@ -5,7 +5,7 @@ export declare const userModel: import("mongoose").Model<{
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
-}, {}, {}, {
+} & import("mongoose").DefaultTimestampProps, {}, {}, {
     id: string;
 }, import("mongoose").Document<unknown, {}, {
     password?: string | null;
@@ -13,41 +13,47 @@ export declare const userModel: import("mongoose").Model<{
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
-}, {
+} & import("mongoose").DefaultTimestampProps, {
     id: string;
-}, import("mongoose").DefaultSchemaOptions> & Omit<{
+}, {
+    timestamps: true;
+}> & Omit<{
     password?: string | null;
     firstName?: string | null;
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
-} & {
+} & import("mongoose").DefaultTimestampProps & {
     _id: import("mongoose").Types.ObjectId;
 } & {
     __v: number;
 }, "id"> & {
     id: string;
-}, Schema<any, import("mongoose").Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
-    password?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
-    username?: string | null;
-    email?: string | null;
-}, import("mongoose").Document<unknown, {}, {
-    password?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
-    username?: string | null;
-    email?: string | null;
+}, Schema<any, import("mongoose").Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, {
+    timestamps: true;
 }, {
-    id: string;
-}, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<{
     password?: string | null;
     firstName?: string | null;
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
-} & {
+} & import("mongoose").DefaultTimestampProps, import("mongoose").Document<unknown, {}, {
+    password?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    username?: string | null;
+    email?: string | null;
+} & import("mongoose").DefaultTimestampProps, {
+    id: string;
+}, import("mongoose").ResolveSchemaOptions<{
+    timestamps: true;
+}>> & Omit<{
+    password?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    username?: string | null;
+    email?: string | null;
+} & import("mongoose").DefaultTimestampProps & {
     _id: import("mongoose").Types.ObjectId;
 } & {
     __v: number;
@@ -62,15 +68,17 @@ export declare const userModel: import("mongoose").Model<{
         lastName?: string | null;
         username?: string | null;
         email?: string | null;
-    }, {
+    } & import("mongoose").DefaultTimestampProps, {
         id: string;
-    }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<{
+    }, import("mongoose").ResolveSchemaOptions<{
+        timestamps: true;
+    }>> & Omit<{
         password?: string | null;
         firstName?: string | null;
         lastName?: string | null;
         username?: string | null;
         email?: string | null;
-    } & {
+    } & import("mongoose").DefaultTimestampProps & {
         _id: import("mongoose").Types.ObjectId;
     } & {
         __v: number;
@@ -83,6 +91,8 @@ export declare const userModel: import("mongoose").Model<{
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
 } & {
     _id: import("mongoose").Types.ObjectId;
 } & {
@@ -93,6 +103,8 @@ export declare const userModel: import("mongoose").Model<{
     lastName?: string | null;
     username?: string | null;
     email?: string | null;
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
 } & {
     _id: import("mongoose").Types.ObjectId;
 } & {

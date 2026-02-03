@@ -1,0 +1,265 @@
+{
+	"knownSymbols": {
+		"defineConfig": [
+			{
+				"name": "defineConfig",
+				"module": "vite",
+				"isDefault": false
+			},
+			{
+				"name": "defineConfig",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Frontend\\vite.config.ts",
+				"isDefault": true
+			}
+		],
+		"react": [
+			{
+				"name": "react",
+				"module": "@vitejs/plugin-react",
+				"isDefault": true
+			}
+		],
+		"dotenv": [
+			{
+				"name": "dotenv",
+				"module": "dotenv",
+				"isDefault": true
+			}
+		],
+		"express": [
+			{
+				"name": "express",
+				"module": "express",
+				"isDefault": true
+			}
+		],
+		"cors": [
+			{
+				"name": "cors",
+				"module": "cors",
+				"isDefault": true
+			}
+		],
+		"type { NextFunction": [
+			{
+				"name": "type { NextFunction",
+				"module": "express",
+				"isDefault": true
+			}
+		],
+		"Request": [
+			{
+				"name": "Request",
+				"module": "express",
+				"isDefault": true
+			}
+		],
+		"Response": [
+			{
+				"name": "Response",
+				"module": "express",
+				"isDefault": true
+			}
+		],
+		"jwt": [
+			{
+				"name": "jwt",
+				"module": "jsonwebtoken",
+				"isDefault": true
+			}
+		],
+		"StrictMode": [
+			{
+				"name": "StrictMode",
+				"module": "react",
+				"isDefault": false
+			}
+		],
+		"createRoot": [
+			{
+				"name": "createRoot",
+				"module": "react-dom/client",
+				"isDefault": false
+			}
+		],
+		"signupSchema": [
+			{
+				"name": "signupSchema",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\schema\\users-validation.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"signinSchema": [
+			{
+				"name": "signinSchema",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\schema\\users-validation.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"z": [
+			{
+				"name": "z",
+				"module": "zod",
+				"isDefault": false
+			}
+		],
+		"bankBalance": [
+			{
+				"name": "bankBalance",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\bank.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"transferMoney": [
+			{
+				"name": "transferMoney",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\bank.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"type { Request": [
+			{
+				"name": "type { Request",
+				"module": "express",
+				"isDefault": true
+			}
+		],
+		"mongoose": [
+			{
+				"name": "mongoose",
+				"module": "mongoose",
+				"isDefault": true
+			}
+		],
+		"signupUser": [
+			{
+				"name": "signupUser",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\user.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"signinUser": [
+			{
+				"name": "signinUser",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\user.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"updateDetailsUser": [
+			{
+				"name": "updateDetailsUser",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\user.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"filterUsersData": [
+			{
+				"name": "filterUsersData",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\controllers\\user.controller.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"bcrypt": [
+			{
+				"name": "bcrypt",
+				"module": "bcryptjs",
+				"isDefault": true
+			}
+		],
+		"async": [
+			{
+				"name": "async",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\db\\db.ts",
+				"isDefault": false
+			}
+		],
+		"userModel": [
+			{
+				"name": "userModel",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\model\\user-model.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"Schema": [
+			{
+				"name": "Schema",
+				"module": "mongoose",
+				"isDefault": false
+			}
+		],
+		"model": [
+			{
+				"name": "model",
+				"module": "mongoose",
+				"isDefault": true
+			}
+		],
+		"accountModel": [
+			{
+				"name": "accountModel",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\model\\bank-account-model.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"{ Schema": [
+			{
+				"name": "{ Schema",
+				"module": "mongoose",
+				"isDefault": true
+			}
+		],
+		"required": [
+			{
+				"name": "required",
+				"module": "zod/mini",
+				"isDefault": false
+			}
+		],
+		"App": [
+			{
+				"name": "App",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Frontend\\src\\App.tsx",
+				"isDefault": true
+			}
+		],
+		"declare": [
+			{
+				"name": "declare",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\dist\\controllers\\user.controller.d.ts",
+				"isDefault": false
+			}
+		],
+		"userMiddleware": [
+			{
+				"name": "userMiddleware",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\middleware\\auth-middleware.ts",
+				"type": "const",
+				"isDefault": false
+			}
+		],
+		"bankRouter": [
+			{
+				"name": "bankRouter",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\routes\\bank.routes.ts",
+				"isDefault": true
+			}
+		],
+		"userRouter": [
+			{
+				"name": "userRouter",
+				"path": "c:\\Users\\Suvamoy\\Desktop\\PayTm\\Backend\\src\\routes\\user.routes.ts",
+				"isDefault": true
+			}
+		]
+	}
+}

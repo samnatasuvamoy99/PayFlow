@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/db/db.ts","./src/model/user-schema.ts","./src/routes/user-auth.ts"],"version":"5.9.3"}
+{"root":["./type.d.ts","./src/index.ts","./src/utils.ts","./src/controllers/bank.controller.ts","./src/controllers/user.controller.ts","./src/db/db.ts","./src/middleware/auth-middleware.ts","./src/model/bank-account-model.ts","./src/model/user-model.ts","./src/routes/bank.routes.ts","./src/routes/user.routes.ts","./src/schema/users-validation.ts"],"version":"5.9.3"}

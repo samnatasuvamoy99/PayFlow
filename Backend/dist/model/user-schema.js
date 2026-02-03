@@ -13,6 +13,6 @@ const userSchema = new Schema({
         type: String, unique: true
     },
     password: String
-});
+}, { timestamps: true });
 export const userModel = model("users", userSchema);
 //# sourceMappingURL=user-schema.js.map
