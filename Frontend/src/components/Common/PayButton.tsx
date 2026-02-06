@@ -1,10 +1,15 @@
 
 import styled from 'styled-components';
 
-export function PayButton(){
+interface PayButtonProps {
+   loading?: boolean;
+   onClick?: () => void;
+}
+
+export function PayButton({ onClick }: PayButtonProps) {
   return (
     <StyledWrapper>
-      <button>
+      <button type="button" onClick={onClick}>
         <div className="svg-wrapper-1">
           <div className="svg-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={29} height={24}>
@@ -73,7 +78,8 @@ const StyledWrapper = styled.div`
     to {
       transform: translateY(-0.1em);
     }
-  }`;
+  }
+`;
 
 
 

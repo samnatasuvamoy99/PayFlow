@@ -2,34 +2,40 @@ import mongoose from "mongoose";
 export declare const accountModel: mongoose.Model<{
     userId: mongoose.Types.ObjectId;
     balance: number;
-}, {}, {}, {
+} & mongoose.DefaultTimestampProps, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
     userId: mongoose.Types.ObjectId;
     balance: number;
-}, {
+} & mongoose.DefaultTimestampProps, {
     id: string;
-}, mongoose.DefaultSchemaOptions> & Omit<{
+}, {
+    timestamps: true;
+}> & Omit<{
     userId: mongoose.Types.ObjectId;
     balance: number;
-} & {
+} & mongoose.DefaultTimestampProps & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }, "id"> & {
     id: string;
-}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
-    userId: mongoose.Types.ObjectId;
-    balance: number;
-}, mongoose.Document<unknown, {}, {
-    userId: mongoose.Types.ObjectId;
-    balance: number;
+}, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, {
+    timestamps: true;
 }, {
-    id: string;
-}, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     userId: mongoose.Types.ObjectId;
     balance: number;
-} & {
+} & mongoose.DefaultTimestampProps, mongoose.Document<unknown, {}, {
+    userId: mongoose.Types.ObjectId;
+    balance: number;
+} & mongoose.DefaultTimestampProps, {
+    id: string;
+}, mongoose.ResolveSchemaOptions<{
+    timestamps: true;
+}>> & Omit<{
+    userId: mongoose.Types.ObjectId;
+    balance: number;
+} & mongoose.DefaultTimestampProps & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
@@ -41,12 +47,14 @@ export declare const accountModel: mongoose.Model<{
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
         userId: mongoose.Types.ObjectId;
         balance: number;
-    }, {
+    } & mongoose.DefaultTimestampProps, {
         id: string;
-    }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
+    }, mongoose.ResolveSchemaOptions<{
+        timestamps: true;
+    }>> & Omit<{
         userId: mongoose.Types.ObjectId;
         balance: number;
-    } & {
+    } & mongoose.DefaultTimestampProps & {
         _id: mongoose.Types.ObjectId;
     } & {
         __v: number;
@@ -56,6 +64,8 @@ export declare const accountModel: mongoose.Model<{
 }, {
     userId: mongoose.Types.ObjectId;
     balance: number;
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -63,6 +73,8 @@ export declare const accountModel: mongoose.Model<{
 }>, {
     userId: mongoose.Types.ObjectId;
     balance: number;
+    createdAt: NativeDate;
+    updatedAt: NativeDate;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

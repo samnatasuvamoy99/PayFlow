@@ -14,7 +14,11 @@ const accountSchema = new mongoose.Schema({
        required:true,
         default: 0,
     }
-});
+    
+   
+},
+{ timestamps: true }
+);
 
 export const accountModel = model("account" , accountSchema) 
 

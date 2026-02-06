@@ -1,7 +1,12 @@
+type InputBoxProps = {
+  value: string;
+  onChange: (value: string) => void;
+  onReset: () => void;
+};
 
-const InputBox = () => {
+const InputBox = ({ value, onChange, onReset }: InputBoxProps) => {
   return (
-    <form className="form relative w-full">
+    <form className="form relative w-full" onSubmit={(e) => e.preventDefault()}>
 
       <button
         type="button"
@@ -24,11 +29,11 @@ const InputBox = () => {
         </svg>
       </button>
 
-
       <input
         type="text"
         placeholder="Search..."
-        required
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="
           input
           w-full
@@ -36,7 +41,9 @@ const InputBox = () => {
           py-3
           rounded-md
           border-2
-          border-black
+          border-gray-800
+          hover:border-y-white
+          outline-none
           focus:outline-none
           focus:black
           placeholder-black-400
@@ -47,7 +54,8 @@ const InputBox = () => {
       />
 
       <button
-        type="reset"
+        type="button"
+        onClick={onReset}
         className="absolute right-3 top-1/2 -translate-y-1/2 p-1"
       >
         <svg
@@ -64,8 +72,11 @@ const InputBox = () => {
           />
         </svg>
       </button>
+
     </form>
   );
 };
 
 export default InputBox;
+
+

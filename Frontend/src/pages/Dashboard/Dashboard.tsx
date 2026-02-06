@@ -5,12 +5,17 @@ import { Users } from "../../components/LayOut/UsersLayout";
 
 export  function Dashboard(){
    return(
-     <div  className="flex  bg-gray-50 w-screen h-screen flex-col ">
-         <Header/>
+     <div  className="flex gap-12 mt-4 bg-gray-50 w-screen-fixed h-screen-fixed  flex-col ">
+         <div >
+             <Header/>
+         </div>
+        
           <div className=" mt-3">
-            <Balance value={500000.0}/>
+            <Balance />
           </div>
-          <div>
+           
+
+          <div >
              <Users/>
           </div>
 

@@ -1,9 +1,57 @@
+import { BACKEND_URL } from "../../config";
+import axios from "axios";
 import { Button2 } from "../../components/Common/Button2";
 import { Input } from "../../components/Common/Input";
 import { Label } from "../../components/Common/Label";
-import {BottomWarning} from "../../components/Common/BottomWarning";
+import { useRef, useState } from "react";
+import { BottomWarning } from "../../components/Common/BottomWarning";
+import { useNavigate } from "react-router-dom";
 
 export function SignUp() {
+
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const FirstNameRef = useRef<HTMLInputElement>(null);
+  const LastNameRef = useRef<HTMLInputElement>(null);
+  const EmailRef = useRef<HTMLInputElement>(null);
+  const Password = useRef<HTMLInputElement>(null);
+
+  const signup = async () => {
+    const firstName = FirstNameRef.current?.value;
+    const lastName = LastNameRef.current?.value;
+    const email = EmailRef.current?.value;
+    const password = Password.current?.value;
+
+    if (!firstName || !lastName || !email || !password) {
+      alert("please fill  all the field");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/auth/signup`, {
+        firstName,
+        lastName,
+        email,
+        password
+      });
+
+      console.log(response);
+      alert("You have signed up successfully!");
+      navigate("/signin");
+    } catch (err: any) {
+      console.error("Signup error:", err);
+      alert(err.response?.data?.message || "Signup failed. Please try again.");
+    }
+    finally {
+      setLoading(false);
+    }
+
+  }
+
+
+
   return (
     <form>
       <div className="flex bg-gray-500 w-screen h-screen flex-col items-center justify-center ">
@@ -20,21 +68,21 @@ export function SignUp() {
           <div className="p-6 space-y-2">
             <div>
               <Label labelName="First Name" />
-              <Input placeholder="Suvamoy" id="firstName" type="firstName" color="gray" />
+              <Input reference={FirstNameRef} placeholder="Suvamoy" id="firstName" type="firstName" color="gray" />
             </div>
 
             <div>
               <Label labelName="Last Name" />
-              <Input placeholder="Samanta" id="lastName" type="lastName"  color="gray"/>
+              <Input reference={LastNameRef} placeholder="Samanta" id="lastName" type="lastName" color="gray" />
             </div>
             < div>
               <Label labelName="Email" />
 
-              <Input placeholder="suvamoy@67gmail.com" id="email" type="email" color="gray" />
+              <Input reference={EmailRef} placeholder="suvamoy@67gmail.com" id="email" type="email" color="gray" />
             </div>
             <div>
               <Label labelName="Password" />
-              <Input placeholder="••••••••" id="password" type="password" color="gray" />
+              <Input reference={Password} placeholder="••••••••" id="password" type="password" color="gray" />
             </div>
 
             <div className="flex items-start">
@@ -58,9 +106,9 @@ export function SignUp() {
               </div>
             </div>
 
-            <Button2 type="submit" text="Create a Account" />
-               
-               <BottomWarning label="  Already have a account ?" buttonText="Login" to="/signin" />
+            <Button2 onClick={signup} loading={loading} type="submit" text="Create a Account" />
+
+            <BottomWarning label="  Already have a account ?" buttonText="Login" to="/signin" />
 
             {/* <div className="mt-4 text-xl text-solid  flex justify-center items-center">
             ? Login

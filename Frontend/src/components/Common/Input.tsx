@@ -3,6 +3,7 @@ type InputFiled = {
   id?: string;
   type?: string;
   color?: "green" | "gray";
+  reference?:any;
 };
 
 export const Input: React.FC<InputFiled> = ({
@@ -10,6 +11,7 @@ export const Input: React.FC<InputFiled> = ({
   id,
   type = "text",
   color = "gray",
+  reference
 }) => {
   const colorClasses =
     color === "green"
@@ -31,6 +33,7 @@ export const Input: React.FC<InputFiled> = ({
       placeholder={type === "password" ? "••••••••" : placeholder}
       id={id}
       type={type}
+      ref={reference}
       className={`bg-gray-50 border
         ${colorClasses}
         sm:text-sm rounded-lg block w-full p-2.5

@@ -17,44 +17,59 @@ export const bankBalance = async (req, res) => {
         });
     }
 };
-//transfer the money someone...
 export const transferMoney = async (req, res) => {
-    // start the session  for transaction for transfer the money....
+    const session = await mongoose.startSession();
     try {
-        const session = await mongoose.startSession();
         session.startTransaction();
         const { amount, to } = req.body;
-        // fetch  the account for the transaction...
-        const account = await accountModel.findOne({
-            userId: new mongoose.Types.ObjectId(req.userId)
+        if (!amount || amount <= 0) {
+            await session.abortTransaction();
+            return res.status(400).json({ message: "Invalid amount" });
+        }
+        if (!req.userId) {
+            await session.abortTransaction();
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        if (req.userId === to) {
+            await session.abortTransaction();
+            return res.status(400).json({ message: "Cannot transfer to yourself" });
+        }
+        const senderId = new mongoose.Types.ObjectId(req.userId);
+        const receiverId = new mongoose.Types.ObjectId(to);
+        const senderAccount = await accountModel.findOne({
+            userId: senderId
         }).session(session);
-        if (!account || account.balance < amount) {
+        if (!senderAccount || senderAccount.balance < amount) {
             await session.abortTransaction();
             return res.status(400).json({
-                message: "Insufficient balance please add some money for tranc.."
+                message: "Insufficient balance"
             });
         }
-        const toAccount = await accountModel.findOne({ userId: to }).session(session);
-        if (!toAccount) {
+        const receiverAccount = await accountModel.findOne({
+            userId: receiverId
+        }).session(session);
+        if (!receiverAccount) {
             await session.abortTransaction();
             return res.status(400).json({
-                message: "Invalid account"
+                message: "Receiver account not found"
             });
         }
-        // Perform the transfer
-        await accountModel.updateOne({ userId: new mongoose.Types.ObjectId(req.userId) }, { $inc: { balance: -amount } }).session(session);
-        await accountModel.updateOne({ userId: to }, { $inc: { balance: amount } }).session(session);
-        // Commit the transaction
+        await accountModel.updateOne({ userId: senderId }, { $inc: { balance: -amount } }).session(session);
+        await accountModel.updateOne({ userId: receiverId }, { $inc: { balance: amount } }).session(session);
         await session.commitTransaction();
-        res.json({
+        return res.json({
             message: "Transfer successful"
         });
     }
     catch (error) {
+        await session.abortTransaction();
         return res.status(500).json({
-            error: error.message || error,
-            message: "Transaction not completed ... !!!"
+            message: "Transaction failed",
+            error: error.message
         });
+    }
+    finally {
+        session.endSession();
     }
 };
 //# sourceMappingURL=bank.controller.js.map

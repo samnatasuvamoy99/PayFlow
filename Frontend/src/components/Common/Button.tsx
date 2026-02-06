@@ -2,13 +2,13 @@ import React from "react";
 
 type ButtonProps = {
   label?: string;
-  href?: string;
+  
   onClick?: () => void;
 };
 
 export const Button: React.FC<ButtonProps> = ({
   label = "Send Money",
-  href = "#",
+ 
   onClick,
 }) => {
   return (
@@ -24,7 +24,6 @@ export const Button: React.FC<ButtonProps> = ({
      
       <a
         role="button"
-        href={href}
         onClick={onClick}
         title="payment"
         className="group mr-2 mt-3 relative inline-flex items-center justify-center

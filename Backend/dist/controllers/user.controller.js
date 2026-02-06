@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { signupSchema, signinSchema } from '../schema/users-validation.js';
 import { accountModel } from "../model/bank-account-model.js";
+import mongoose from "mongoose";
 //signup controller
 export const signupUser = async (req, res) => {
     try {
@@ -13,7 +14,6 @@ export const signupUser = async (req, res) => {
         await userModel.create({
             firstName: parsed.firstName,
             lastName: parsed.lastName,
-            // username: parsed.userName,
             email: parsed.email,
             password: hashedPassword
         });
@@ -88,7 +88,8 @@ export const signinUser = async (req, res) => {
             }
             // bcrypt the token...
             const token = jwt.sign({
-                id: user._id.toString()
+                id: user._id.toString(),
+                firstName: user.firstName
             }, process.env.JWT_PASSWORD);
             res.json({
                 token
@@ -161,6 +162,7 @@ export const filterUsersData = async (req, res) => {
             ],
         });
         res.status(200).json({ user: users.map(user => ({
+                _id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName
             }))
@@ -170,6 +172,33 @@ export const filterUsersData = async (req, res) => {
         console.error(error);
         res.status(500).json({
             message: "Server error",
+        });
+    }
+};
+export const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id || Array.isArray(id)) {
+            return res.status(400).json({
+                message: "Invalid user id"
+            });
+        }
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                message: "Invalid ObjectId format"
+            });
+        }
+        const user = await userModel.findById(id).select("firstName lastName");
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        res.json({ user });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: "Server error"
         });
     }
 };

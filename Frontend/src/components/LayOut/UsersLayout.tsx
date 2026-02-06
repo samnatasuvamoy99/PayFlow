@@ -1,63 +1,55 @@
 import { useState } from "react";
-import InputBox from "../Common/searchInput";
+import { useUsers } from "../../Hooks/Featch_user.hooks";
 import { Button } from "../Common/Button";
+import { useNavigate } from "react-router-dom";
 
-type UserType = {
+export type UserType = {
   firstName: string;
   lastName: string;
-  _id: number;
+  _id: string;
 };
 
 export const Users = () => {
-  const [users, setUsers] = useState<UserType[]>([
-    {
-      firstName: "Harkirat",
-      lastName: "Singh",
-      _id: 1,
-    },
-  ]);
+      const [filter, setFilter] = useState("");
+   const { users} = useUsers(filter);
+
+  
 
   return (
-    <>
-      <div className="font-bold mt-6 text-lg">Users</div>
+    <div className="flex min-h-screen flex-col bg-white px-4 pt-4">
+      <div className="font-bold text-lg mb-2">Users</div>
 
-      <div className="my-2">
-        <InputBox/>
-      </div>
-
-      <div>
+      <div className="flex-1">
         {users.map((user) => (
           <UserBalance key={user._id} user={user} />
         ))}
       </div>
-    </>
-  );
-};
-
-type UserProps = {
-  user: UserType;
-};
-
-const UserBalance: React.FC<UserProps> = ({ user }) => {
-  return (
-    <div className="flex justify-between py-2">
-      <div className="flex">
-        <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
-          <div className="flex flex-col justify-center h-full text-xl">
-            {user.firstName[0]}
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center h-full">
-          <div>
-            {user.firstName} {user.lastName}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col justify-center h-full">
-       <Button/>
-      </div>
     </div>
   );
 };
+
+export const UserBalance: React.FC<{ user: UserType }> = ({ user }) => {
+ 
+const navigate = useNavigate();
+  
+  return (
+    <div className="flex justify-between items-center py-3 border-b">
+      <div className="flex items-center">
+        <div className="h-12 w-12 rounded-full ml-3 shadow-2xl bg-slate-200 flex items-center justify-center mr-3">
+          <span className="text-xl font-semibold">
+            {user.firstName[0]}
+          </span>
+        </div>
+
+        <span className="text-sm font-medium">
+          {user.firstName} {user.lastName}
+        </span>
+      </div>
+
+      <Button 
+      onClick={() => navigate(`/money-transfer/${user._id}`)} />
+    </div>
+  );
+};
+
+
