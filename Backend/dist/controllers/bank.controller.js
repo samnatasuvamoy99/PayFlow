@@ -22,13 +22,18 @@ export const transferMoney = async (req, res) => {
     try {
         session.startTransaction();
         const { amount, to } = req.body;
-        if (!amount || amount <= 0) {
+        const parsedAmount = Number(amount);
+        if (!parsedAmount || parsedAmount <= 0) {
             await session.abortTransaction();
             return res.status(400).json({ message: "Invalid amount" });
         }
         if (!req.userId) {
             await session.abortTransaction();
             return res.status(401).json({ message: "Unauthorized" });
+        }
+        if (!mongoose.Types.ObjectId.isValid(to)) {
+            await session.abortTransaction();
+            return res.status(400).json({ message: "Invalid receiver id" });
         }
         if (req.userId === to) {
             await session.abortTransaction();
@@ -39,7 +44,7 @@ export const transferMoney = async (req, res) => {
         const senderAccount = await accountModel.findOne({
             userId: senderId
         }).session(session);
-        if (!senderAccount || senderAccount.balance < amount) {
+        if (!senderAccount || senderAccount.balance < parsedAmount) {
             await session.abortTransaction();
             return res.status(400).json({
                 message: "Insufficient balance"
@@ -54,8 +59,8 @@ export const transferMoney = async (req, res) => {
                 message: "Receiver account not found"
             });
         }
-        await accountModel.updateOne({ userId: senderId }, { $inc: { balance: -amount } }).session(session);
-        await accountModel.updateOne({ userId: receiverId }, { $inc: { balance: amount } }).session(session);
+        await accountModel.updateOne({ userId: senderId }, { $inc: { balance: -parsedAmount } }).session(session);
+        await accountModel.updateOne({ userId: receiverId }, { $inc: { balance: parsedAmount } }).session(session);
         await session.commitTransaction();
         return res.json({
             message: "Transfer successful"

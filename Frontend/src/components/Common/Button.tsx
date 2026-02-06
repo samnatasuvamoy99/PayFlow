@@ -7,9 +7,8 @@ type ButtonProps = {
 };
 
 export const Button: React.FC<ButtonProps> = ({
-  label = "Send Money",
- 
-  onClick,
+  label ,
+  onClick
 }) => {
   return (
     <div className="relative inline-flex items-center justify-center gap-4 group">

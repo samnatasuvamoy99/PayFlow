@@ -11,11 +11,16 @@ export const signupUser = async (req, res) => {
         // hashing  the  user-password for security par-pass
         const hashedPassword = await bcrypt.hash(parsed.password, 10);
         // push the user-information into the db ...
-        await userModel.create({
+        const user = await userModel.create({
             firstName: parsed.firstName,
             lastName: parsed.lastName,
             email: parsed.email,
             password: hashedPassword
+        });
+        // balance are credit user account....................
+        await accountModel.create({
+            userId: user._id,
+            balance: Math.floor(Math.random() * 10000) + 1
         });
         res.status(201).json({
             message: "welcome to payTm successfully signup !... "
@@ -59,15 +64,15 @@ export const signinUser = async (req, res) => {
         const user = await userModel.findOne({
             email
         });
-        const userid = user?._id;
-        //...................... create a random balance this user.............
-        if (userid) {
-            const BalanceCredit = await accountModel.create({
-                userId: userid,
-                balance: 1 + Math.random() * 10000
-            });
-            console.log(BalanceCredit);
-        }
+        //     const userid = user?._id;
+        //  //...................... create a random balance this user.............
+        //  if(userid){
+        //       const BalanceCredit =  await accountModel.create({
+        //           userId : userid,
+        //           balance : 1 + Math.random() * 10000
+        //       })
+        //       console.log(BalanceCredit);
+        //  }   
         if (!user) {
             return res.status(404).json({
                 message: "Does not find any users...!"

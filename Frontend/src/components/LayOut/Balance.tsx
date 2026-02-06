@@ -25,7 +25,7 @@ export const Balance = () => {
                 }
             );
 
-            console.log(response.data);
+            // console.log(response.data);
             setValue(response.data.balance);
 
         } catch (error) {
@@ -34,7 +34,7 @@ export const Balance = () => {
     };
 
 
-     console.log(users);
+     //console.log(users);
 
     // Balance load
     useEffect(() => {

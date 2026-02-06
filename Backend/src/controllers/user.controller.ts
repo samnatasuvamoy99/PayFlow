@@ -17,13 +17,23 @@ export const signupUser = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(parsed.password, 10);
 
     // push the user-information into the db ...
-    await userModel.create({
+    const user = await userModel.create({
       firstName: parsed.firstName,
       lastName: parsed.lastName,
       email: parsed.email,
       password: hashedPassword
 
     });
+
+    // balance are credit user account....................
+
+    await accountModel.create({
+  userId: user._id,
+  balance: Math.floor(Math.random() * 10000) + 1
+});
+
+
+
 
     res.status(201).json({
       message: "welcome to payTm successfully signup !... "
@@ -78,17 +88,17 @@ export const signinUser = async (req: Request, res: Response) => {
       email
     })
 
-        const userid = user?._id;
+    //     const userid = user?._id;
 
-     //...................... create a random balance this user.............
-     if(userid){
-          const BalanceCredit =  await accountModel.create({
-              userId : userid,
-              balance : 1 + Math.random() * 10000
+    //  //...................... create a random balance this user.............
+    //  if(userid){
+    //       const BalanceCredit =  await accountModel.create({
+    //           userId : userid,
+    //           balance : 1 + Math.random() * 10000
               
-          })
-          console.log(BalanceCredit);
-     }   
+    //       })
+    //       console.log(BalanceCredit);
+    //  }   
 
 
 

@@ -22,6 +22,7 @@ export const bankBalance = async(req:Request , res:Response) =>{
  }
 }
 
+
 export const transferMoney = async (req: Request, res: Response) => {
   const session = await mongoose.startSession();
 
@@ -30,41 +31,49 @@ export const transferMoney = async (req: Request, res: Response) => {
 
     const { amount, to } = req.body;
 
+ 
+    const parsedAmount = Number(amount);
 
-    if (!amount || amount <= 0) {
+    
+    if (!parsedAmount || parsedAmount <= 0) {
       await session.abortTransaction();
       return res.status(400).json({ message: "Invalid amount" });
     }
 
-
+    
     if (!req.userId) {
       await session.abortTransaction();
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-   
+  
+    if (!mongoose.Types.ObjectId.isValid(to)) {
+      await session.abortTransaction();
+      return res.status(400).json({ message: "Invalid receiver id" });
+    }
+
+    
     if (req.userId === to) {
       await session.abortTransaction();
       return res.status(400).json({ message: "Cannot transfer to yourself" });
     }
 
-
     const senderId = new mongoose.Types.ObjectId(req.userId);
     const receiverId = new mongoose.Types.ObjectId(to);
 
-
+    
     const senderAccount = await accountModel.findOne({
       userId: senderId
     }).session(session);
 
-    if (!senderAccount || senderAccount.balance < amount) {
+    if (!senderAccount || senderAccount.balance < parsedAmount) {
       await session.abortTransaction();
       return res.status(400).json({
         message: "Insufficient balance"
       });
     }
 
-
+ 
     const receiverAccount = await accountModel.findOne({
       userId: receiverId
     }).session(session);
@@ -79,13 +88,13 @@ export const transferMoney = async (req: Request, res: Response) => {
 
     await accountModel.updateOne(
       { userId: senderId },
-      { $inc: { balance: -amount } }
+      { $inc: { balance: -parsedAmount } }
     ).session(session);
 
-
+  
     await accountModel.updateOne(
       { userId: receiverId },
-      { $inc: { balance: amount } }
+      { $inc: { balance: parsedAmount } }
     ).session(session);
 
     await session.commitTransaction();
@@ -95,7 +104,6 @@ export const transferMoney = async (req: Request, res: Response) => {
     });
 
   } catch (error: any) {
-
     await session.abortTransaction();
 
     return res.status(500).json({

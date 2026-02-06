@@ -33,7 +33,7 @@ export const UserBalance: React.FC<{ user: UserType }> = ({ user }) => {
 const navigate = useNavigate();
   
   return (
-    <div className="flex justify-between items-center py-3 border-b">
+    <div className="flex mt-2 justify-between items-center py-3 border-b">
       <div className="flex items-center">
         <div className="h-12 w-12 rounded-full ml-3 shadow-2xl bg-slate-200 flex items-center justify-center mr-3">
           <span className="text-xl font-semibold">
@@ -47,6 +47,7 @@ const navigate = useNavigate();
       </div>
 
       <Button 
+      label="Send Money"
       onClick={() => navigate(`/money-transfer/${user._id}`)} />
     </div>
   );
